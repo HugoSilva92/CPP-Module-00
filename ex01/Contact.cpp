@@ -1,44 +1,45 @@
 #include "Contact.hpp"
 
 Contact::Contact(){
-	written = false;
+	_written = false;
+}
+
+bool	Contact::check_digit(std::string str)
+{
+	for (size_t i = 0; i < str.length(); i++)
+	{
+		if (!isdigit(str[i])) return false;
+	}
+	return true;
 }
 
 bool	Contact::add_cnt(int i){
-	std::string f_name;
-	std::string l_name;
-	std::string n_name;
-	std::string ph_num;
-	std::string dk_sec;
+	std::string f_name , l_name, n_name, ph_num, dk_sec;
 
 	std::cout << "First name: ";
 	getline(std::cin, f_name);
-	if (f_name.length() == 0)
-		return false;
+	if (f_name.length() == 0) return false;
 	std::cout << "Last name: ";
 	getline(std::cin, l_name);
-	if (l_name.length() == 0)
-		return false;
+	if (l_name.length() == 0) return false;
 	std::cout << "Nickname: ";
 	getline(std::cin, n_name);
-	if (n_name.length() == 0)
-		return false;
-	std::cout << "Phone Number: ";
+	if (n_name.length() == 0) return false;
+	std::cout << "Phone Number (Just numbers): ";
 	getline(std::cin, ph_num);
-	if (ph_num.length() == 0)
-		return false;
+	if (ph_num.length() == 0 || !check_digit(ph_num)) return false;
 	std::cout << "Dark Secret: ";
 	getline(std::cin, dk_sec);
-	if (dk_sec.length() == 0)
-		return false;
+	if (dk_sec.length() == 0) return false;
 
-	first_name = f_name;
-	last_name = l_name;
-	nickname = n_name;
-	num = ph_num;
-	darkest_secret = dk_sec;
-	index = i + 1;
-	written = true;
+	_first_name = f_name;
+	_last_name = l_name;
+	_nickname = n_name;
+	_num = ph_num;
+	_darkest_secret = dk_sec;
+	_index = i + 1;
+	_written = true;
+	std::cout << "\nContact added in index: " << _index << std::endl;
 	return true;
 }
 
@@ -52,27 +53,38 @@ std::string	Contact::resize_string(std::string str)
 	return str;
 }
 
-void	Contact::print()
+void	Contact::print_search()
 {
-	first_name = resize_string(first_name);
-	last_name = resize_string(last_name);
-	nickname = resize_string(nickname);
-	num = resize_string(num);
+	std::cout << "First Name: ";
+	std::cout << _first_name << std::endl;
+	std::cout << "Last Name: ";
+	std::cout << _last_name << std::endl;
+	std::cout << "Nickname: ";
+	std::cout << _nickname << std::endl;
+	std::cout << "Phone Number: ";
+	std::cout << _num << std::endl;
+	std::cout << "Darkest Secret: ";
+	std::cout << _darkest_secret << std::endl;
+}
 
-	std::cout << "-------------------------------------------------------\n";
-	std::cout << "|     Index|FirstName| Last Name|  Nickname|    Number|\n";
-	std::cout << "-------------------------------------------------------\n";
-	std::cout << "|" << std::setw(9) << index << "|";
-	std::cout << std::setw(10) << first_name << "|";
-	std::cout << std::setw(10) << last_name << "|";
-	std::cout << std::setw(10) << nickname << "|";
-	std::cout << std::setw(10) << num << "|" << std::endl;
-	std::cout << "-------------------------------------------------------\n";
+void	Contact::print(int i)
+{
+	std::string f_name = resize_string(_first_name);
+	std::string l_name = resize_string(_last_name);
+	std::string nick = resize_string(_nickname);
+	std::string number = resize_string(_num);
+
+
+	std::cout << "|" << std::setw(10) << i + 1 << "|";
+	std::cout << std::setw(10) << f_name << "|";
+	std::cout << std::setw(10) << l_name << "|";
+	std::cout << std::setw(10) << nick << "|";
+	std::cout << std::setw(10) << number << "|" << std::endl;
 }
 
 bool	Contact::is_written()
 {
-	if (written)
+	if (_written)
 		return true;
 	return false;
 }

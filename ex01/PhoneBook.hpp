@@ -13,6 +13,7 @@ class PhoneBook{
 		bool	add_to_book(int i);
 		void	print(int i);
 		bool	search(std::string c);
+		void	show();
 		~PhoneBook();
 };
 
