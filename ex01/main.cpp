@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include <csignal>
 
 void	print_layout()
 {
@@ -16,16 +17,17 @@ void	print_layout()
 
 int	main(){
 	PhoneBook book;
-	std::string cmd;
+	std::string cmd, src;
 	int	i = 0;
-	std::string	src;
 
-	while (1)
+	while (true)
 	{
 		print_layout();
 		std::cout << "            What is your command Master?" << std::endl;
 		getline(std::cin, cmd);
-		if (cmd == "break")
+		if (std::cin.eof() || cmd == "EXIT")
+			exit(0);
+		else if (cmd == "break")
 			break;
 		if (cmd == "ADD")
 		{
@@ -49,8 +51,6 @@ int	main(){
 			std::cout << "\nPress Enter to continue..." << std::endl;
 			std::cin.get();
 		}
-		else if (cmd == "EXIT")
-			exit (0);
 		else
 			std::cout << "\nWrong command" << std::endl;
 	}
