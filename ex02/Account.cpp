@@ -7,14 +7,13 @@ int	Account::_totalAmount = 0;
 int	Account::_totalNbDeposits = 0;
 int	Account::_totalNbWithdrawals = 0;
 
-
 Account::Account(void){
 	_amount = 0;
-	_nbDeposits = 0;
-	_nbWithdrawals = 0;
 }
 
 Account::Account( int initial_deposit ){
+	_nbDeposits = 0;
+	_nbWithdrawals = 0;
 	_amount = initial_deposit;
 	_totalAmount += initial_deposit;
 	_displayTimestamp();
